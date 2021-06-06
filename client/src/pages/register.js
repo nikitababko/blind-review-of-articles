@@ -33,6 +33,8 @@ const Register = () => {
     cf_password,
   } = userData;
 
+  console.log(userData);
+
   const [typePass, setTypePass] = useState(false);
   const [typeCfPass, setTypeCfPass] = useState(false);
 
@@ -73,7 +75,7 @@ const Register = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="username">Никнейм</label>
+          <label htmlFor="username">Логин</label>
           <input
             type="text"
             className="form-control"
@@ -109,15 +111,21 @@ const Register = () => {
         {/* Степень */}
         <div className="form-group">
           <label htmlFor="degree">Степень</label>
-          <input
-            type="text"
+          <select
             className="form-control"
             id="degree"
             name="degree"
             onChange={handleChangeInput}
             value={degree}
-            style={{ background: `${alert.rank ? '#fd2d6a14' : ''}` }}
-          />
+            required
+          >
+            <option value="" selected disabled hidden>
+              Укажите вашу степень
+            </option>
+            <option value="Доктор наук">Доктор наук</option>
+            <option value="Кандидат наук">Кандидат наук</option>
+            <option value="Без степени">Без степени</option>
+          </select>
 
           <small className="form-text text-danger">
             {alert.degree ? alert.degree : ''}
@@ -127,15 +135,23 @@ const Register = () => {
         {/* Звание */}
         <div className="form-group">
           <label htmlFor="rank">Звание</label>
-          <input
-            type="text"
+          <select
             className="form-control"
             id="rank"
             name="rank"
             onChange={handleChangeInput}
             value={rank}
-            style={{ background: `${alert.rank ? '#fd2d6a14' : ''}` }}
-          />
+            required
+          >
+            <option value="" selected disabled hidden>
+              Укажите ваше звание
+            </option>
+            <option value="Профессор">Профессор</option>
+            <option value="Доцент">Доцент</option>
+            <option value="Старший преподаватель">
+              Старший преподаватель
+            </option>
+          </select>
 
           <small className="form-text text-danger">
             {alert.rank ? alert.rank : ''}
@@ -236,29 +252,29 @@ const Register = () => {
 
         <div className="row justify-content-between mx-0 mb-1">
           <label htmlFor="male">
-            Мужчина:{' '}
+            Автор:{' '}
             <input
               type="radio"
               id="male"
               name="gender"
-              value="male"
+              value="Автор"
               defaultChecked
               onChange={handleChangeInput}
             />
           </label>
 
           <label htmlFor="female">
-            Женщина:{' '}
+            Рецензент:{' '}
             <input
               type="radio"
               id="female"
               name="gender"
-              value="female"
+              value="Рецензент"
               onChange={handleChangeInput}
             />
           </label>
 
-          <label htmlFor="other">
+          {/* <label htmlFor="other">
             Другое:{' '}
             <input
               type="radio"
@@ -267,10 +283,10 @@ const Register = () => {
               value="other"
               onChange={handleChangeInput}
             />
-          </label>
+          </label> */}
         </div>
 
-        <button type="submit" className="btn btn-dark w-100">
+        <button type="submit" className="btn btn-dark">
           Регистрация
         </button>
 

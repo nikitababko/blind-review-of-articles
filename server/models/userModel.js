@@ -23,19 +23,19 @@ const userSchema = new mongoose.Schema(
     },
     degree: {
       type: String,
-      required: true,
+      // required: true,
     },
     rank: {
       type: String,
-      required: true,
+      // required: true,
     },
     placeOfWork: {
       type: String,
-      required: true,
+      // required: true,
     },
     currentCity: {
       type: String,
-      required: true,
+      // required: true,
     },
     password: {
       type: String,
@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
         'https://res.cloudinary.com/nikitababko/image/upload/v1616588775/Avatars/avatar_g5b8fp.png',
     },
     role: { type: String, default: 'user' },
-    gender: { type: String, default: 'male' },
+    gender: { type: String, default: 'Автор' },
     mobile: { type: String, default: '' },
     address: { type: String, default: '' },
     story: {

@@ -8,12 +8,24 @@ const LikeButton = ({ isLike, handleLike, handleUnLike }) => {
     <>
       {isLike ? (
         <i
-          className="fas fa-thumbs-up text-success"
+          className="fas fa-check text-success"
           onClick={handleUnLike}
           style={{ filter: theme ? 'invert(1)' : 'invert(0)' }}
-        />
+        >
+          Отправлено
+        </i>
       ) : (
-        <i className="far fa-thumbs-up" onClick={handleLike} />
+        <>
+          <i className="fas fa-check" onClick={handleLike}>
+            {' '}
+            Отправить рецензию
+          </i>
+          <br />
+          <i className="fas fa-ban" onClick={handleLike}>
+            {' '}
+            Отказ в публикации
+          </i>
+        </>
       )}
     </>
   );

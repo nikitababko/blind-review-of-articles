@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '../../Avatar';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,7 +28,7 @@ const CardHeader = ({ post }) => {
   const handleDeletePost = () => {
     if (window.confirm('Вы уверены, что хотите удалить эту статью?')) {
       dispatch(deletePost({ post, auth, socket }));
-      return history.push('/');
+      return history.push('/articles');
     }
   };
 
@@ -36,12 +36,115 @@ const CardHeader = ({ post }) => {
     navigator.clipboard.writeText(`${BASE_URL}/post/${post._id}`);
   };
 
+  // console.log(post.user);
+
   return (
     <div className="card_header">
       <div className="d-flex">
-        <Avatar src={post.user.avatar} size="big-avatar" />
+        {auth.user.role === 'admin' ? (
+          <>
+            <Avatar src={post.user.avatar} size="big-avatar" />
 
-        <div className="card_name">
+            <div className="card_name">
+              <h6 className="m-0">
+                <Link
+                  to={`/profile/${post.user._id}`}
+                  className="text-dark"
+                >
+                  {post.user.fullname} ({post.user.username})
+                </Link>
+              </h6>
+              <div className="d-flex flex-column mt-4">
+                <span>
+                  <strong>Заголовок:</strong> {post.title}
+                </span>
+                <span className="article-authors">
+                  <strong>Авторы:</strong>
+                  {arrayOfAuthors(post.authors).map((author) => (
+                    <span>
+                      <br />
+                      <span className="article-authors__author">
+                        {author}
+                      </span>
+                    </span>
+                  ))}
+                </span>
+                <span>
+                  <strong>Предметная область:</strong> {post.subjectArea}
+                </span>
+                <span>
+                  <strong>Количество слов:</strong> {post.content.length}
+                </span>
+                <span>
+                  <strong>Язык:</strong> {post.lang}
+                </span>
+                <span>
+                  <strong>Организация:</strong> {post.organization}
+                </span>
+                <span>
+                  <strong>Город проживания:</strong> {post.currentCity}
+                </span>
+              </div>
+              <small className="text-muted">
+                {moment(post.createdAt).fromNow()}
+              </small>
+            </div>
+          </>
+        ) : (
+          <>
+            <Avatar
+              src="https://res.cloudinary.com/nikitababko/image/upload/v1616588775/Avatars/avatar_g5b8fp.png"
+              size="big-avatar"
+            />
+
+            <div className="card_name">
+              <h6 className="m-0">
+                {/* <Link
+                  to={`/profile/${post.user._id}`}
+                  className="text-dark"
+                >
+                  {post.user.fullname} ({post.user.username})
+                </Link> */}
+              </h6>
+              <div className="d-flex flex-column mt-4">
+                <span>
+                  <strong>Заголовок:</strong> {post.title}
+                </span>
+                {/* <span className="article-authors">
+                  <strong>Авторы:</strong>
+                  {arrayOfAuthors(post.authors).map((author) => (
+                    <span>
+                      <br />
+                      <span className="article-authors__author">
+                        {author}
+                      </span>
+                    </span>
+                  ))}
+                </span> */}
+                <span>
+                  <strong>Предметная область:</strong> {post.subjectArea}
+                </span>
+                <span>
+                  <strong>Количество слов:</strong> {post.content.length}
+                </span>
+                <span>
+                  <strong>Язык:</strong> {post.lang}
+                </span>
+                {/* <span>
+                  <strong>Организация:</strong> {post.organization}
+                </span> */}
+                {/* <span>
+                  <strong>Город проживания:</strong> {post.currentCity}
+                </span> */}
+              </div>
+              <small className="text-muted">
+                {moment(post.createdAt).fromNow()}
+              </small>
+            </div>
+          </>
+        )}
+
+        {/* <div className="card_name">
           <h6 className="m-0">
             <Link to={`/profile/${post.user._id}`} className="text-dark">
               {post.user.fullname} ({post.user.username})
@@ -59,17 +162,12 @@ const CardHeader = ({ post }) => {
                   <span className="article-authors__author">{author}</span>
                 </span>
               ))}
-              {/* <strong>Авторы:</strong>
-              <br />
-              <span>{arrayOfAuthors(post.authors)[0]}</span>
-              <br />
-              <span>{arrayOfAuthors(post.authors)[1]}</span> */}
             </span>
             <span>
               <strong>Предметная область:</strong> {post.subjectArea}
             </span>
             <span>
-              <strong>Объем страниц:</strong> {post.content.length} cлов
+              <strong>Количество слов:</strong> {post.content.length}
             </span>
             <span>
               <strong>Язык:</strong> {post.lang}
@@ -84,7 +182,7 @@ const CardHeader = ({ post }) => {
           <small className="text-muted">
             {moment(post.createdAt).fromNow()}
           </small>
-        </div>
+        </div> */}
       </div>
 
       <div className="nav-item dropdown">

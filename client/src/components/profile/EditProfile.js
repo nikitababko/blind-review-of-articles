@@ -218,7 +218,7 @@ const EditProfile = ({ setOnEdit }) => {
           </small>
         </div>
 
-        <label htmlFor="gender">Пол</label>
+        {/* <label htmlFor="gender">Пол</label>
         <div className="input-group-prepend px-0 mb-4">
           <select
             name="gender"
@@ -231,7 +231,7 @@ const EditProfile = ({ setOnEdit }) => {
             <option value="female">Женщина</option>
             <option value="other">Другое</option>
           </select>
-        </div>
+        </div> */}
 
         <button className="btn btn-info w-100 save" type="submit">
           Сохранить

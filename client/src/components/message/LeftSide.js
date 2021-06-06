@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import UserCard from '../UserCard';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { getDataAPI } from '../../utils/fetchData';
 import { GLOBALTYPES } from '../../redux/actions/globalTypes';
@@ -13,7 +15,7 @@ const LeftSide = () => {
   const { auth, message, online } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('admin');
   const [searchUsers, setSearchUsers] = useState([]);
 
   const history = useHistory();
@@ -21,6 +23,16 @@ const LeftSide = () => {
 
   const pageEnd = useRef();
   const [page, setPage] = useState(0);
+
+  const searchAdmin = useRef(null);
+  const searchBtnAutoClick = useRef(null);
+  useEffect(() => {
+    if (auth.user.role === 'user') {
+      searchAdmin.current.focus();
+      searchBtnAutoClick.current.focus();
+      document.querySelector('.click').click();
+    }
+  }, []);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -90,31 +102,61 @@ const LeftSide = () => {
     }
   }, [online, message.firstLoad, dispatch]);
 
-  const user = {
-    avatar:
-      'https://res.cloudinary.com/nikitababko/image/upload/v1622554909/Avatars/765-4_eci4ih.jpg',
-    fullname: 'Администрация',
-    username: 'Администрация',
-    _id: '60b6070b94bab91384b35ac0',
-  };
+  // const user = {
+  //   avatar:
+  //     'https://res.cloudinary.com/nikitababko/image/upload/v1622554909/Avatars/765-4_eci4ih.jpg',
+  //   fullname: 'Администрация',
+  //   username: 'Администрация',
+  //   _id: '60bb5aee6001c531305a1545',
+  // };
 
+  console.log(auth);
   return (
     <>
-      {/* <form className="message_header" onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={search}
-          placeholder="Enter to Search..."
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <form className="message_header" onSubmit={handleSearch}>
+        {auth.user.role === 'user' ? (
+          <>
+            <input
+              type="text"
+              value={search}
+              placeholder="Enter to Search..."
+              onChange={(e) => setSearch(e.target.value)}
+              ref={searchAdmin}
+              style={{ visibility: 'hidden' }}
+            />
 
-        <button type="submit" style={{ display: 'none' }}>
-          Search
-        </button>
-      </form> */}
+            <button
+              className="click"
+              type="submit"
+              ref={searchBtnAutoClick}
+              style={{ visibility: 'hidden' }}
+            >
+              Search
+            </button>
+          </>
+        ) : (
+          <>
+            <input
+              type="text"
+              value={search}
+              placeholder="Enter to Search..."
+              onChange={(e) => setSearch(e.target.value)}
+              style={{ visibility: 'hidden' }}
+            />
+
+            <button
+              className="click"
+              type="submit"
+              style={{ visibility: 'hidden' }}
+            >
+              Search
+            </button>
+          </>
+        )}
+      </form>
 
       <div className="message_chat_list">
-        {/* {searchUsers.length !== 0 ? (
+        {searchUsers.length !== 0 ? (
           <>
             {searchUsers.map((user) => (
               <div
@@ -146,15 +188,15 @@ const LeftSide = () => {
               </div>
             ))}
           </>
-        )} */}
+        )}
 
-        <div
+        {/* <div
           key={user._id}
           className={`message_user ${isActive(user)}`}
           onClick={() => handleAddUser(user)}
         >
           <UserCard user={user} />
-        </div>
+        </div> */}
 
         <button ref={pageEnd} style={{ opacity: 0 }}>
           Load More

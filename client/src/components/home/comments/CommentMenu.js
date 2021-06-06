@@ -48,7 +48,7 @@ const CommentMenu = ({ post, comment, setOnEdit }) => {
               ) : (
                 <div className="dropdown-item" onClick={handleRemove}>
                   <span className="material-icons">delete_outline</span>{' '}
-                  Remove
+                  Удалить
                 </div>
               )
             ) : (

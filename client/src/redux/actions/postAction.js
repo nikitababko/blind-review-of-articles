@@ -91,6 +91,8 @@ export const getPosts = (token) => async (dispatch) => {
     dispatch({ type: POST_TYPES.LOADING_POST, payload: true });
     const res = await getDataAPI('posts', token);
 
+    // console.log(res.data);
+
     dispatch({
       type: POST_TYPES.GET_POSTS,
       payload: { ...res.data, page: 2 },
@@ -170,7 +172,7 @@ export const likePost =
       // Notify
       const msg = {
         id: auth.user._id,
-        text: 'оценил ваш пост.',
+        text: 'оценил вашу рецензию.',
         recipients: [post.user._id],
         url: `/post/${post._id}`,
         content: post.content,
@@ -222,7 +224,7 @@ export const unLikePost =
       // Notify
       const msg = {
         id: auth.user._id,
-        text: 'оценил ваш пост.',
+        text: 'оценил вашу рецензию.',
         recipients: [post.user._id],
         url: `/post/${post._id}`,
       };
@@ -241,6 +243,7 @@ export const getPost =
     if (detailPost.every((post) => post._id !== id)) {
       try {
         const res = await getDataAPI(`post/${id}`, auth.token);
+        console.log(res);
         dispatch({ type: POST_TYPES.GET_POST, payload: res.data.post });
       } catch (err) {
         dispatch({

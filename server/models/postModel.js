@@ -7,10 +7,22 @@ const postSchema = new mongoose.Schema(
     subjectArea: String,
     volume: String,
     lang: String,
-    literacy: Number,
-    relevance: Number,
-    uniqueness: Number,
-    utility: Number,
+    literacy: {
+      type: Array,
+      default: [0],
+    },
+    relevance: {
+      type: Array,
+      default: [0],
+    },
+    uniqueness: {
+      type: Array,
+      default: [0],
+    },
+    utility: {
+      type: Array,
+      default: [0],
+    },
     organization: String,
     currentCity: String,
     content: String,

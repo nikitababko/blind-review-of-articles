@@ -87,6 +87,18 @@
     }
   }
 
+  .card_body {
+    .carousel-inner {
+      .carousel-item {
+        img {
+          width: 100%;
+          max-width: 512px;
+          max-height: 232px;
+        }
+      }
+    }
+  }
+
   .card_body-content {
     padding: 0 25px;
     margin-top: -10px;
@@ -117,9 +129,13 @@
     img {
       width: 28px;
       height: 28px;
-      transform: translate(5px, -5px);
+      transform: translate(5px, 9px);
       opacity: 0.9;
     }
+  }
+
+  .card_footer {
+    padding-left: 11px;
   }
 }
 

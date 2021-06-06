@@ -1,6 +1,10 @@
 import React from 'react';
 
 const Toast = ({ msg, handleShow, bgColor }) => {
+  setTimeout(() => {
+    handleShow();
+  }, 3000);
+
   return (
     <div
       className={`toast show position-fixed text-light ${bgColor}`}

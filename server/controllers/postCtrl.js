@@ -62,35 +62,37 @@ const postCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
-  getPosts: async (req, res) => {
-    try {
-      const features = new APIfeatures(
-        Posts.find({
-          user: [...req.user.following, req.user._id],
-        }),
-        req.query
-      ).paginating();
+  // getPosts: async (req, res) => {
+  //   try {
+  //     const features = new APIfeatures(
+  //       Posts.find({
+  //         user: [...req.user.following, req.user._id],
+  //       }),
+  //       req.query
+  //     ).paginating();
 
-      const posts = await features.query
-        .sort('-createdAt')
-        .populate('user likes', 'avatar username fullname followers')
-        .populate({
-          path: 'comments',
-          populate: {
-            path: 'user likes',
-            select: '-password',
-          },
-        });
+  //     const posts = await features.query
+  //       .sort('-createdAt')
+  //       .populate('user likes', 'avatar username fullname followers')
+  //       .populate({
+  //         path: 'comments',
+  //         populate: {
+  //           path: 'user likes',
+  //           select: '-password',
+  //         },
+  //       });
 
-      res.json({
-        msg: 'Success!',
-        result: posts.length,
-        posts,
-      });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
+  //     console.log(req.user);
+
+  //     res.json({
+  //       msg: 'Success!',
+  //       result: posts.length,
+  //       posts,
+  //     });
+  //   } catch (err) {
+  //     return res.status(500).json({ msg: err.message });
+  //   }
+  // },
   updatePost: async (req, res) => {
     try {
       const { content, images } = req.body;
@@ -143,11 +145,13 @@ const postCtrl = {
       const like = await Posts.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $push: { likes: req.user._id },
-          literacy: req.body.newPost.raitingStars.literacy,
-          relevance: req.body.newPost.raitingStars.relevance,
-          uniqueness: req.body.newPost.raitingStars.uniqueness,
-          utility: req.body.newPost.raitingStars.utility,
+          $push: {
+            likes: req.user._id,
+            literacy: req.body.newPost.raitingStars.literacy,
+            relevance: req.body.newPost.raitingStars.relevance,
+            uniqueness: req.body.newPost.raitingStars.uniqueness,
+            utility: req.body.newPost.raitingStars.utility,
+          },
         },
         { new: true }
       );
@@ -207,6 +211,24 @@ const postCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // getUserPosts: async (req, res) => {
+  //   try {
+  //     const features = new APIfeatures(
+  //       Posts.find({ user: req.params.id }),
+  //       req.query
+  //     ).paginating();
+  //     const posts = await features.query.sort('-createdAt');
+
+  //     res.json({
+  //       posts,
+  //       result: posts.length,
+  //     });
+  //   } catch (err) {
+  //     return res.status(500).json({ msg: err.message });
+  //   }
+  // },
+
+  // Experemental========================================================
   getUserPosts: async (req, res) => {
     try {
       const features = new APIfeatures(
@@ -214,6 +236,8 @@ const postCtrl = {
         req.query
       ).paginating();
       const posts = await features.query.sort('-createdAt');
+
+      console.log(posts);
 
       res.json({
         posts,
@@ -223,6 +247,39 @@ const postCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
+  getPosts: async (req, res) => {
+    try {
+      const posts = await Posts.find().populate(
+        'user likes',
+        'avatar username fullname followers'
+      );
+
+      res.json({
+        msg: 'Success!',
+        result: posts.length,
+        posts,
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+
+  getAllPosts: async (req, res) => {
+    try {
+      const post = await Posts.find();
+
+      // console.log(post);
+
+      res.json({
+        post,
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  //==========================================================================
+
   getPost: async (req, res) => {
     try {
       const post = await Posts.findById(req.params.id)

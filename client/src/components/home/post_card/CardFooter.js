@@ -141,8 +141,16 @@ const CardFooter = ({ post }) => {
 
   const averageVal = (raitingStarsArr) => {
     return (
-      raitingStarsArr.reduce((a, b) => a + b) / raitingStarsArr.length
+      raitingStarsArr
+        .map((item) => {
+          return item.reduce((a, b) => a + b) / raitingStarsArr.length;
+        })
+        .reduce((a, b) => a + b) / raitingStarsArr.length
     );
+  };
+
+  const postAverage = (post) => {
+    return post.reduce((a, b) => a + b) / raitingStarsArr.length;
   };
 
   const raitingStarsArr = [
@@ -152,100 +160,103 @@ const CardFooter = ({ post }) => {
     post.utility,
   ];
 
-  const [state, setstate] = useState(raitingStarsArr);
-
   useEffect(() => {
-    averageVal(raitingStarsArr);
+    if (raitingStarsArr.length) {
+      averageVal(raitingStarsArr);
+    }
   }, [isLike, saved]);
 
   return (
     <div className="card_footer">
-      <div className="card_icon_menu">
-        <div className="raiting_stars">
-          <div>
-            {/* <button onClick={handleRaitingStars}>Click me</button> */}
-            <strong>Грамотность:</strong>
-            <ReactStars
-              name="literacy"
-              count={5}
-              onChange={literacyRaiting}
-              size={24}
-              value={post.literacy}
-              activeColor="#ff7058"
-              isHalf={true}
-            />
-          </div>
-          <div>
-            <strong>Актуальность:</strong>
-            <ReactStars
-              name="relevance"
-              count={5}
-              onChange={relevanceRaiting}
-              size={24}
-              value={post.relevance}
-              activeColor="#ff7058"
-              isHalf={true}
-            />
-          </div>
-          <div>
-            <strong>Уникальность:</strong>
-            <ReactStars
-              name="uniqueness"
-              count={5}
-              onChange={uniquenessRaiting}
-              size={24}
-              value={post.uniqueness}
-              activeColor="#ff7058"
-              isHalf={true}
-            />
-          </div>
-          <div>
-            <strong>Полезность:</strong>
-            <ReactStars
-              name="utility"
-              count={5}
-              onChange={utilityRaiting}
-              size={24}
-              value={post.utility}
-              activeColor="#ff7058"
-              isHalf={true}
-            />
-          </div>
+      {/* {auth.user._id !== post.user._id && ( */}
+      {auth.user.gender === 'Рецензент' || auth.user.role === 'admin' ? (
+        <div className="card_icon_menu">
+          <div className="raiting_stars">
+            <div>
+              {/* <button onClick={handleRaitingStars}>Click me</button> */}
+              <strong>Грамотность:</strong>
+              <ReactStars
+                name="literacy"
+                count={5}
+                onChange={literacyRaiting}
+                size={24}
+                value={postAverage(raitingStarsArr[0])}
+                activeColor="#ff7058"
+                isHalf={true}
+              />
+            </div>
+            <div>
+              <strong>Актуальность:</strong>
+              <ReactStars
+                name="relevance"
+                count={5}
+                onChange={relevanceRaiting}
+                size={24}
+                value={postAverage(raitingStarsArr[1])}
+                activeColor="#ff7058"
+                isHalf={true}
+              />
+            </div>
+            <div>
+              <strong>Уникальность:</strong>
+              <ReactStars
+                name="uniqueness"
+                count={5}
+                onChange={uniquenessRaiting}
+                size={24}
+                value={postAverage(raitingStarsArr[2])}
+                activeColor="#ff7058"
+                isHalf={true}
+              />
+            </div>
+            <div>
+              <strong>Полезность:</strong>
+              <ReactStars
+                name="utility"
+                count={5}
+                onChange={utilityRaiting}
+                size={24}
+                value={postAverage(raitingStarsArr[3])}
+                activeColor="#ff7058"
+                isHalf={true}
+              />
+            </div>
 
-          <div>
-            <strong>Средняя оценка</strong>
-            <br />
-            <span style={{ fontSize: '25px' }}>
-              {averageVal(raitingStarsArr)}
-            </span>
-          </div>
-        </div>
-        <div>
-          <LikeButton
-            isLike={isLike}
-            handleLike={handleLike}
-            handleUnLike={handleUnLike}
-          />
+            <div>
+              <strong>Средняя оценка</strong>
+              <br />
+              <span style={{ fontSize: '25px' }}>
+                {averageVal(raitingStarsArr)}
+              </span>
+            </div>
 
-          {/* <Link to={`/post/${post._id}`} className="text-dark">
+            <LikeButton
+              isLike={isLike}
+              handleLike={handleLike}
+              handleUnLike={handleUnLike}
+            />
+          </div>
+          <div>
+            {/* <Link to={`/post/${post._id}`} className="text-dark">
             <i className="far fa-comment" />
           </Link> */}
 
-          <img
-            src={Send}
-            alt="Send"
-            onClick={() => setIsShare(!isShare)}
-          />
+            <img
+              src={Send}
+              alt="Send"
+              onClick={() => setIsShare(!isShare)}
+            />
+          </div>
+          {saved ? (
+            <i
+              className="fas fa-bookmark text-info"
+              onClick={handleUnSavePost}
+            />
+          ) : (
+            <i className="far fa-bookmark" onClick={handleSavePost} />
+          )}
         </div>
-        {saved ? (
-          <i
-            className="fas fa-bookmark text-info"
-            onClick={handleUnSavePost}
-          />
-        ) : (
-          <i className="far fa-bookmark" onClick={handleSavePost} />
-        )}
-      </div>
+      ) : null}
 
       <div className="d-flex justify-content-between">
         <h6 style={{ padding: '0 25px', cursor: 'pointer' }}>

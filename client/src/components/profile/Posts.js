@@ -38,7 +38,8 @@ const Posts = ({ auth, id, dispatch, profile }) => {
 
   return (
     <div>
-      <Status />
+      {/* // TODO: убрал возможность добавления статьи, если user.gender === 'Рецензент'  */}
+      {auth.user.gender === 'Автор' && <Status />}
       <PostThumb posts={posts} result={result} />
       {load && (
         <img src={LoadIcon} alt="loading" className="d-block mx-auto" />

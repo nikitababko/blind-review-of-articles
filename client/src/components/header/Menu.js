@@ -20,7 +20,7 @@ const Menu = () => {
     // { label: 'Discover', icon: 'explore', path: '/discover' },
     {
       label: 'Articles',
-      text: 'Все статьи',
+      text: 'Рецензирование статей',
       icon: 'explore',
       path: '/articles',
     },

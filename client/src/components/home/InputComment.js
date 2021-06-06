@@ -37,7 +37,7 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
       {children}
       <input
         type="text"
-        placeholder="Прокоментировать..."
+        placeholder="Текст комментария"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         style={{
@@ -50,7 +50,7 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
       <Icons setContent={setContent} content={content} theme={theme} />
 
       <button type="submit" className="postBtn">
-        Оставить комментарий
+        Отправить комментарий
       </button>
     </form>
   );

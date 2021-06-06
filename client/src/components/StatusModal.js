@@ -146,6 +146,7 @@ const StatusModal = () => {
 
         {/*  */}
         <div className="form-group">
+          <label htmlFor="title">Электроника и наноэлектроника</label>
           <input
             type="text"
             className="form-control"
@@ -158,6 +159,7 @@ const StatusModal = () => {
         </div>
 
         <div className="form-group">
+          <label htmlFor="authors">Авторы</label>
           <input
             type="text"
             className="form-control"
@@ -170,6 +172,7 @@ const StatusModal = () => {
         </div>
 
         <div className="form-group">
+          <label htmlFor="subjectArea">Предметная область</label>
           <input
             type="text"
             className="form-control"
@@ -194,6 +197,7 @@ const StatusModal = () => {
         </div> */}
 
         <div className="form-group">
+          <label htmlFor="lang">Язык статьи</label>
           <input
             type="text"
             className="form-control"
@@ -206,6 +210,7 @@ const StatusModal = () => {
         </div>
 
         <div className="form-group">
+          <label htmlFor="organization">Организация</label>
           <input
             type="text"
             className="form-control"
@@ -218,6 +223,7 @@ const StatusModal = () => {
         </div>
 
         <div className="form-group">
+          <label htmlFor="currentCity">Город проживания</label>
           <input
             type="text"
             className="form-control"
@@ -292,7 +298,7 @@ const StatusModal = () => {
           )}
 
           <div className="input_images">
-            {stream ? (
+            {/* {stream ? (
               <i className="fas fa-camera" onClick={handleCapture} />
             ) : (
               <>
@@ -310,7 +316,19 @@ const StatusModal = () => {
                   />
                 </div>
               </>
-            )}
+            )} */}
+
+            <div className="file_upload">
+              <i className="fas fa-image" />
+              <input
+                type="file"
+                name="file"
+                id="file"
+                multiple
+                accept="image/*,video/*"
+                onChange={handleChangeImages}
+              />
+            </div>
           </div>
         </div>
 
