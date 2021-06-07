@@ -303,7 +303,7 @@ const CardFooter = ({ post, setCountComment, countComment }) => {
             <strong>Рецензии</strong>
             {post.commentText.length
               ? post.commentText.map((element) => (
-                  <div>
+                  <div style={{ width: '400px' }}>
                     <span>{element}</span>
                   </div>
                 ))
