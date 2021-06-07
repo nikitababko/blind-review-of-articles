@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: 25,
+      // maxlength: 25,
     },
     username: {
       type: String,
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema(
     story: {
       type: String,
       default: '',
-      maxlength: 200,
+      // maxlength: 1200,
     },
     website: { type: String, default: '' },
     followers: [{ type: mongoose.Types.ObjectId, ref: 'user' }],

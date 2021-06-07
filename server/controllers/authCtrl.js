@@ -21,7 +21,7 @@ const authCtrl = {
       } = req.body;
       let newUserName = username.toLowerCase().replace(/ /g, '');
 
-      console.log(req.body);
+      // console.log(req.body);
 
       const user_name = await Users.findOne({ username: newUserName });
       if (user_name)
@@ -51,7 +51,7 @@ const authCtrl = {
         password: passwordHash,
         gender,
       });
-      console.log(newUser);
+      // console.log(newUser);
 
       const access_token = createAccessToken({ id: newUser._id });
       const refresh_token = createRefreshToken({ id: newUser._id });
@@ -82,7 +82,7 @@ const authCtrl = {
       const { fullname, degree, rank, placeOfWork, currentCity } =
         req.body;
 
-      console.log(req.body);
+      // console.log(req.body);
 
       const newReviewer = new Reviewer({
         fullname,

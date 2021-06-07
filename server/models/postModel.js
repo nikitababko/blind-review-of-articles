@@ -7,6 +7,7 @@ const postSchema = new mongoose.Schema(
     subjectArea: String,
     volume: String,
     lang: String,
+    commentText: String,
     literacy: {
       type: Array,
       default: [0],

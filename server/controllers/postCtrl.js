@@ -32,7 +32,7 @@ const postCtrl = {
         images,
       } = req.body;
 
-      console.log(req.body);
+      // console.log(req.body);
 
       if (images.length === 0)
         return res.status(400).json({ msg: 'Please add your photo.' });
@@ -95,11 +95,26 @@ const postCtrl = {
   // },
   updatePost: async (req, res) => {
     try {
-      const { content, images } = req.body;
+      const {
+        title,
+        authors,
+        subjectArea,
+        lang,
+        organization,
+        currentCity,
+        content,
+        images,
+      } = req.body;
 
       const post = await Posts.findOneAndUpdate(
         { _id: req.params.id },
         {
+          title,
+          authors,
+          subjectArea,
+          lang,
+          organization,
+          currentCity,
           content,
           images,
         }
@@ -117,6 +132,12 @@ const postCtrl = {
         msg: 'Статья обновлена!',
         newPost: {
           ...post._doc,
+          title,
+          authors,
+          subjectArea,
+          lang,
+          organization,
+          currentCity,
           content,
           images,
         },
@@ -127,13 +148,13 @@ const postCtrl = {
   },
   likePost: async (req, res) => {
     try {
-      console.log(req.body.newPost.raitingStars);
+      // console.log(req.body.newPost.commentText);
 
       const newPost = await Posts({
         _id: req.params.id,
       });
 
-      console.log(newPost);
+      // console.log(newPost);
 
       const post = await Posts.find({
         _id: req.params.id,
@@ -152,6 +173,7 @@ const postCtrl = {
             uniqueness: req.body.newPost.raitingStars.uniqueness,
             utility: req.body.newPost.raitingStars.utility,
           },
+          commentText: req.body.newPost.commentText,
         },
         { new: true }
       );
