@@ -13,8 +13,8 @@ const valid = ({
 
   if (!fullname) {
     err.fullname = 'Пожалуйста добавьте ФИО.';
-  } else if (fullname.length > 25) {
-    err.fullname = 'ФИО может содержать до 25 символов.';
+  } else if (fullname.length > 45) {
+    err.fullname = 'ФИО может содержать до 45 символов.';
   }
 
   if (!username) {

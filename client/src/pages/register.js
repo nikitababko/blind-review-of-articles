@@ -258,7 +258,7 @@ const Register = () => {
               id="male"
               name="gender"
               value="Автор"
-              defaultChecked
+              // defaultChecked
               onChange={handleChangeInput}
             />
           </label>

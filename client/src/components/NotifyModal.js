@@ -72,7 +72,7 @@ const NotifyModal = () => {
 
               <div className="mx-1 flex-fill">
                 <div>
-                  <strong className="mr-1">{msg.user.username}</strong>
+                  {/* <strong className="mr-1">{msg.user.username}</strong> */}
                   <span>{msg.text}</span>
                 </div>
                 {msg.content && (

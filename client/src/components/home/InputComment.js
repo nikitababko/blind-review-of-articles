@@ -18,6 +18,8 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
 
     setContent('');
 
+    // const test = auth.user;
+
     const newComment = {
       content,
       likes: [],

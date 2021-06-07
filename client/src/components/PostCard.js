@@ -13,8 +13,8 @@ const PostCard = ({ post, theme }) => {
       <CardBody post={post} theme={theme} />
       <CardFooter post={post} />
 
-      <Comments post={post} />
-      <InputComment post={post} />
+      {/* <Comments post={post} />
+      <InputComment post={post} /> */}
     </div>
   );
 };

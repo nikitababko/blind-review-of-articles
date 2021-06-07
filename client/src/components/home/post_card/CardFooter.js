@@ -20,6 +20,9 @@ const CardFooter = ({ post }) => {
   const [isLike, setIsLike] = useState(false);
   const [loadLike, setLoadLike] = useState(false);
 
+  // Text comment
+  const [commentText, setCommentText] = useState('');
+
   const [isShare, setIsShare] = useState(false);
 
   const { auth, theme, socket } = useSelector((state) => state);
@@ -102,7 +105,9 @@ const CardFooter = ({ post }) => {
 
     setLoadLike(true);
 
-    await dispatch(likePost({ post, auth, socket, raitingStars }));
+    await dispatch(
+      likePost({ post, auth, socket, raitingStars, commentText })
+    );
     setLoadLike(false);
   };
 
@@ -229,6 +234,13 @@ const CardFooter = ({ post }) => {
                 {averageVal(raitingStarsArr)}
               </span>
             </div>
+
+            <textarea
+              name="content"
+              value={commentText}
+              placeholder="Напишите рецензию"
+              onChange={(e) => setCommentText(e.target.value)}
+            />
 
             <LikeButton
               isLike={isLike}

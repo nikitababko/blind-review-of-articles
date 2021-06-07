@@ -8,15 +8,15 @@ const Carousel = ({ images, id }) => {
 
   const { theme } = useSelector((state) => state);
 
-  const [count, setCount] = useState(0);
-  setTimeout(() => {
-    setCount(count + 1);
-  }, 3000);
-  useEffect(() => {
-    setTimeout(() => {
-      document.querySelector('.carousel-control-next').click();
-    }, 3000);
-  }, [count]);
+  //   const [count, setCount] = useState(0);
+  //   setTimeout(() => {
+  //     setCount(count + 1);
+  //   }, 3000);
+  //   useEffect(() => {
+  //     setTimeout(() => {
+  //       document.querySelector('.carousel-control-next').click();
+  //     }, 3000);
+  //   }, [count]);
 
   return (
     <div id={`image${id}`} className="carousel slide" data-ride="carousel">

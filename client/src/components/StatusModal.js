@@ -91,11 +91,24 @@ const StatusModal = () => {
     if (images.length === 0)
       return dispatch({
         type: GLOBALTYPES.ALERT,
-        payload: { error: 'Please add your photo.' },
+        payload: { error: 'Пожалуйста, добавьте картинку.' },
       });
 
     if (status.onEdit) {
-      dispatch(updatePost({ content, images, auth, status }));
+      dispatch(
+        updatePost({
+          title,
+          authors,
+          subjectArea,
+          lang,
+          organization,
+          currentCity,
+          content,
+          images,
+          auth,
+          status,
+        })
+      );
     } else {
       dispatch(
         createPost({
@@ -114,6 +127,7 @@ const StatusModal = () => {
       );
     }
 
+    setTitle('');
     setContent('');
     setImages([]);
     if (tracks) tracks.stop();
@@ -122,6 +136,7 @@ const StatusModal = () => {
 
   useEffect(() => {
     if (status.onEdit) {
+      setTitle(status.title);
       setContent(status.content);
       setImages(status.images);
     }
@@ -146,7 +161,7 @@ const StatusModal = () => {
 
         {/*  */}
         <div className="form-group">
-          <label htmlFor="title">Электроника и наноэлектроника</label>
+          <label htmlFor="title">Заголовок статьи</label>
           <input
             type="text"
             className="form-control"

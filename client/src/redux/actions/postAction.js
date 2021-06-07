@@ -108,13 +108,30 @@ export const getPosts = (token) => async (dispatch) => {
 };
 
 export const updatePost =
-  ({ content, images, auth, status }) =>
+  ({
+    title,
+    authors,
+    subjectArea,
+    lang,
+    organization,
+    currentCity,
+    content,
+    images,
+    auth,
+    status,
+  }) =>
   async (dispatch) => {
     let media = [];
     const imgNewUrl = images.filter((img) => !img.url);
     const imgOldUrl = images.filter((img) => img.url);
 
     if (
+      status.title === title &&
+      status.authors === authors &&
+      status.subjectArea === subjectArea &&
+      status.lang === lang &&
+      status.organization === organization &&
+      status.currentCity === currentCity &&
       status.content === content &&
       imgNewUrl.length === 0 &&
       imgOldUrl.length === status.images.length
@@ -128,6 +145,12 @@ export const updatePost =
       const res = await patchDataAPI(
         `post/${status._id}`,
         {
+          title,
+          authors,
+          subjectArea,
+          lang,
+          organization,
+          currentCity,
           content,
           images: [...imgOldUrl, ...media],
         },
@@ -152,13 +175,14 @@ export const updatePost =
   };
 
 export const likePost =
-  ({ post, auth, socket, raitingStars }) =>
+  ({ post, auth, socket, raitingStars, commentText }) =>
   async (dispatch) => {
     // console.log(raitingStars);
     const newPost = {
       ...post,
       likes: [...post.likes, auth.user],
       raitingStars,
+      commentText,
     };
 
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
@@ -172,7 +196,7 @@ export const likePost =
       // Notify
       const msg = {
         id: auth.user._id,
-        text: 'оценил вашу рецензию.',
+        text: 'оценил вашу статью.',
         recipients: [post.user._id],
         url: `/post/${post._id}`,
         content: post.content,
@@ -224,7 +248,7 @@ export const unLikePost =
       // Notify
       const msg = {
         id: auth.user._id,
-        text: 'оценил вашу рецензию.',
+        text: 'прокоментировал вашу статью.',
         recipients: [post.user._id],
         url: `/post/${post._id}`,
       };
