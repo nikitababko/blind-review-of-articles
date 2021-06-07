@@ -10,6 +10,7 @@ import { POST_TYPES } from '../../redux/actions/postAction';
 const Posts = () => {
   const { homePosts, auth, theme } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const [countComment, setCountComment] = useState([]);
 
   const [load, setLoad] = useState(false);
 
@@ -44,14 +45,32 @@ const Posts = () => {
 
       {auth.user.gender === 'Рецензент' && auth.user.role !== 'admin'
         ? lastTwoElements.map((post) => (
-            <PostCard key={post._id} post={post} theme={theme} />
+            <PostCard
+              key={post._id}
+              post={post}
+              theme={theme}
+              setCountComment={setCountComment}
+              countComment={countComment}
+            />
           ))
         : auth.user.role === 'admin'
         ? homePosts.posts.map((post) => (
-            <PostCard key={post._id} post={post} theme={theme} />
+            <PostCard
+              key={post._id}
+              post={post}
+              theme={theme}
+              setCountComment={setCountComment}
+              countComment={countComment}
+            />
           ))
         : postsAuthUser().map((post) => (
-            <PostCard key={post._id} post={post} theme={theme} />
+            <PostCard
+              key={post._id}
+              post={post}
+              theme={theme}
+              setCountComment={setCountComment}
+              countComment={countComment}
+            />
           ))}
 
       {/* {auth.user.gender === 'Рецензент' && auth.user.role !== 'admin'

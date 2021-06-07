@@ -1,3 +1,4 @@
+import StatisticsArticles from 'components/statisctics/StatisticsArticles';
 import StatisticsAuthors from 'components/statisctics/StatisticsAuthors';
 import StatisticsReviewing from 'components/statisctics/StatisticsReviewing';
 import React from 'react';
@@ -16,6 +17,11 @@ const Statistics = () => {
             Авторы
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#articles">
+            Итоги рецензирования
+          </a>
+        </li>
       </ul>
 
       <div class="tab-content">
@@ -24,6 +30,9 @@ const Statistics = () => {
         </div>
         <div class="tab-pane fade" id="characteristics">
           <StatisticsAuthors />
+        </div>
+        <div class="tab-pane fade" id="articles">
+          <StatisticsArticles />
         </div>
       </div>
     </>

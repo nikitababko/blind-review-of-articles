@@ -83,6 +83,22 @@ const StatisticsAuthors = () => {
       .filter((item) => item.includes('фывыфвыфй')).length;
   };
 
+  const countRussian = () => {
+    return homePosts.posts
+      .map((post) => {
+        return post.lang;
+      })
+      .filter((item) => item.includes('Русский')).length;
+  };
+
+  const countEnglish = () => {
+    return homePosts.posts
+      .map((post) => {
+        return post.lang;
+      })
+      .filter((item) => item.includes('Английский')).length;
+  };
+
   return (
     <div className="reviewing-articles">
       <form>
@@ -100,22 +116,7 @@ const StatisticsAuthors = () => {
 
           <div className="statistics_block">
             <p>
-              Количество рецензентов <span>по степеням:</span>
-            </p>
-            <p>
-              Число докторов: <strong>{countDoctors(users)}</strong>
-            </p>
-            <p>
-              Число кандидатов: <strong>{countCandidates(users)}</strong>
-            </p>
-            <p>
-              Без степени: <strong>{countNone(users)}</strong>
-            </p>
-          </div>
-
-          <div className="statistics_block">
-            <p>
-              Количество рецензентов <span>по предметной области:</span>
+              Количество статей <span>по предметной области:</span>
             </p>
             <p>
               Механика: <strong>{countSubjectAreaMech(homePosts)}</strong>
@@ -123,6 +124,18 @@ const StatisticsAuthors = () => {
             <p>
               Электрика:{' '}
               <strong>{countSubjectAreaElectro(homePosts)}</strong>
+            </p>
+          </div>
+
+          <div className="statistics_block">
+            <p>
+              Количество статей <span>на следующих языках:</span>
+            </p>
+            <p>
+              Русский: <strong>{countRussian(homePosts)}</strong>
+            </p>
+            <p>
+              Английский: <strong>{countEnglish(homePosts)}</strong>
             </p>
           </div>
         </div>

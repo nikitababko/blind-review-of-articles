@@ -172,8 +172,8 @@ const postCtrl = {
             relevance: req.body.newPost.raitingStars.relevance,
             uniqueness: req.body.newPost.raitingStars.uniqueness,
             utility: req.body.newPost.raitingStars.utility,
+            commentText: req.body.newPost.commentText,
           },
-          commentText: req.body.newPost.commentText,
         },
         { new: true }
       );
@@ -274,7 +274,7 @@ const postCtrl = {
     try {
       const posts = await Posts.find().populate(
         'user likes',
-        'avatar username fullname followers'
+        'avatar degree placeOfWork specialty username fullname followers'
       );
 
       res.json({

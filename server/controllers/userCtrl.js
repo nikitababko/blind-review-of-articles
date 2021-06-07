@@ -50,6 +50,7 @@ const userCtrl = {
         degree,
         rank,
         placeOfWork,
+        specialty,
         currentCity,
         mobile,
         address,
@@ -57,8 +58,6 @@ const userCtrl = {
         story,
         gender,
       } = req.body;
-
-      console.log(req.body);
 
       if (!fullname)
         return res.status(400).json({ msg: 'Пожалуйста добавьте ФИО.' });
@@ -71,6 +70,7 @@ const userCtrl = {
           degree,
           rank,
           placeOfWork,
+          specialty,
           currentCity,
           mobile,
           address,

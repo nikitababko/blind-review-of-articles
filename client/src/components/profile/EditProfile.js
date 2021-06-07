@@ -10,6 +10,7 @@ const EditProfile = ({ setOnEdit }) => {
     degree: '',
     rank: '',
     placeOfWork: '',
+    specialty: '',
     currentCity: '',
     mobile: '',
     address: '',
@@ -23,6 +24,7 @@ const EditProfile = ({ setOnEdit }) => {
     degree,
     rank,
     placeOfWork,
+    specialty,
     currentCity,
     mobile,
     address,
@@ -148,6 +150,18 @@ const EditProfile = ({ setOnEdit }) => {
             name="placeOfWork"
             id="placeOfWork"
             value={placeOfWork}
+            className="form-control"
+            onChange={handleInput}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="specialty">Специальность</label>
+          <input
+            type="text"
+            name="specialty"
+            id="specialty"
+            value={specialty}
             className="form-control"
             onChange={handleInput}
           />

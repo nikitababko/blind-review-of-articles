@@ -16,7 +16,7 @@ import {
 import ShareModal from '../../ShareModal';
 import { BASE_URL } from '../../../utils/config';
 
-const CardFooter = ({ post }) => {
+const CardFooter = ({ post, setCountComment, countComment }) => {
   const [isLike, setIsLike] = useState(false);
   const [loadLike, setLoadLike] = useState(false);
 
@@ -30,6 +30,10 @@ const CardFooter = ({ post }) => {
 
   const [saved, setSaved] = useState(false);
   const [saveLoad, setSaveLoad] = useState(false);
+
+  // Рецензенту можно не больше 3 статей за раз рецензировать
+  // const [countComment, setCountComment] = useState([]);
+  console.log(countComment);
 
   // Raiting stars
   // const initialState = {
@@ -103,6 +107,10 @@ const CardFooter = ({ post }) => {
     // handleRaitingStars();
     // console.log(124);
 
+    localStorage.setItem('countComment', countComment);
+
+    setCountComment(Number(countComment) + Number(1));
+
     setLoadLike(true);
 
     await dispatch(
@@ -110,6 +118,10 @@ const CardFooter = ({ post }) => {
     );
     setLoadLike(false);
   };
+
+  // useEffect(() => {
+  //   localStorage.removeItem('countComment');
+  // }, []);
 
   const handleUnLike = async () => {
     if (loadLike) return;
@@ -171,10 +183,25 @@ const CardFooter = ({ post }) => {
     }
   }, [isLike, saved]);
 
+  // const test = {
+  //   0: 'Без степени',
+  //   1: 'Кандидат наук',
+  //   2: 'Доктор наук',
+  // };
+
+  // console.log(auth.user.placeOfWork);
+  console.log(post);
+  console.log(auth.user._id);
+
   return (
     <div className="card_footer">
       {/* {auth.user._id !== post.user._id && ( */}
-      {auth.user.gender === 'Рецензент' || auth.user.role === 'admin' ? (
+      {(auth.user.gender === 'Рецензент' &&
+        auth.user.degree === 'Доктор наук' &&
+        post.user.placeOfWork !== auth.user.placeOfWork &&
+        countComment <= 2 &&
+        post.user.specialty === auth.user.specialty) ||
+      auth.user.role === 'admin' ? (
         <div className="card_icon_menu">
           <div className="raiting_stars">
             <div>
@@ -272,6 +299,17 @@ const CardFooter = ({ post }) => {
 
       <div className="d-flex justify-content-between">
         <h6 style={{ padding: '0 25px', cursor: 'pointer' }}>
+          <span>
+            <strong>Рецензии</strong>
+            {post.commentText.length
+              ? post.commentText.map((element) => (
+                  <div>
+                    <span>{element}</span>
+                  </div>
+                ))
+              : null}
+          </span>
+          <br />
           люди оценили {post.likes.length} раза
         </h6>
 
