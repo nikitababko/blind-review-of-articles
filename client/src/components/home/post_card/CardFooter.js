@@ -190,14 +190,14 @@ const CardFooter = ({ post, setCountComment, countComment }) => {
   // };
 
   // console.log(auth.user.placeOfWork);
-  console.log(post);
-  console.log(auth.user._id);
+  // console.log(post);
+  // console.log(auth.user._id);
 
   return (
     <div className="card_footer">
       {/* {auth.user._id !== post.user._id && ( */}
       {(auth.user.gender === 'Рецензент' &&
-        auth.user.degree === 'Доктор наук' &&
+        // auth.user.degree === 'Доктор наук' &&
         post.user.placeOfWork !== auth.user.placeOfWork &&
         countComment <= 2 &&
         post.user.specialty === auth.user.specialty) ||
