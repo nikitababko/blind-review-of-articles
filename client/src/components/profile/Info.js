@@ -51,7 +51,7 @@ const Info = ({ id, auth, profile, dispatch }) => {
               )}
             </div>
 
-            <div className="follow_btn">
+            {/* <div className="follow_btn">
               <span
                 className="mr-4"
                 onClick={() => setShowFollowers(true)}
@@ -64,7 +64,7 @@ const Info = ({ id, auth, profile, dispatch }) => {
               >
                 {user.following.length} Подписки
               </span>
-            </div>
+            </div> */}
 
             <h6>
               <span className="font-weight-bold">ФИО:</span>{' '}
