@@ -33,7 +33,7 @@ const CardFooter = ({ post, setCountComment, countComment }) => {
 
   // Рецензенту можно не больше 3 статей за раз рецензировать
   // const [countComment, setCountComment] = useState([]);
-  console.log(countComment);
+  // console.log(countComment);
 
   // Raiting stars
   // const initialState = {

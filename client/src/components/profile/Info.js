@@ -75,6 +75,11 @@ const Info = ({ id, auth, profile, dispatch }) => {
               <br />
               <span className="font-weight-bold">Звание:</span> {user.rank}
               <br />
+              <span className="font-weight-bold">
+                Предметная область:
+              </span>{' '}
+              {user.subjectArea}
+              <br />
               <span className="font-weight-bold">Адрес:</span>{' '}
               {user.address}
               <br />

@@ -99,6 +99,55 @@ const StatisticsAuthors = () => {
       .filter((item) => item.includes('Английский')).length;
   };
 
+  // Countries
+  const countRussiaCountry = (array) => {
+    return array
+      .map((item) => {
+        return item.country;
+      })
+      .filter((item) => item.includes('Россия')).length;
+  };
+
+  const countKanadaCountry = (array) => {
+    return array
+      .map((item) => {
+        return item.country;
+      })
+      .filter((item) => item.includes('Канада')).length;
+  };
+
+  const countAustriaCountry = (array) => {
+    return array
+      .map((item) => {
+        return item.country;
+      })
+      .filter((item) => item.includes('Австрия')).length;
+  };
+
+  const countGermanyCountry = (array) => {
+    return array
+      .map((item) => {
+        return item.country;
+      })
+      .filter((item) => item.includes('Германия')).length;
+  };
+
+  const countUSACountry = (array) => {
+    return array
+      .map((item) => {
+        return item.country;
+      })
+      .filter((item) => item.includes('США')).length;
+  };
+
+  const countNetherlandsCountry = (array) => {
+    return array
+      .map((item) => {
+        return item.country;
+      })
+      .filter((item) => item.includes('Нидерланды')).length;
+  };
+
   return (
     <div className="reviewing-articles">
       <form>
@@ -113,6 +162,36 @@ const StatisticsAuthors = () => {
         </div>
         <div className="d-flex flex-column pencil-block statistics">
           <h3>Авторы</h3>
+
+          <div className="statistics_block">
+            <p>Место проживания:</p>
+            <p>
+              Страна:
+              <div style={{ marginLeft: '60px' }}>
+                <p>
+                  Россия: <strong>{countRussiaCountry(users)}</strong>
+                </p>
+                <p>
+                  США: <strong>{countUSACountry(users)}</strong>
+                </p>
+                <p>
+                  Канада: <strong>{countKanadaCountry(users)}</strong>
+                </p>
+                <p>
+                  Нидерланды:{' '}
+                  <strong>{countNetherlandsCountry(users)}</strong>
+                </p>
+                <p>
+                  Австрия: <strong>{countAustriaCountry(users)}</strong>
+                </p>
+                <p>
+                  Германия: <strong>{countGermanyCountry(users)}</strong>
+                </p>
+              </div>
+            </p>
+          </div>
+
+          <br />
 
           <div className="statistics_block">
             <p>

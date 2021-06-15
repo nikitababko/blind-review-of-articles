@@ -58,7 +58,7 @@ const StatisticsArticles = () => {
   //   console.log(countSuccessArticles().Number());
   // }
 
-  console.log(countSuccessArticles());
+  // console.log(countSuccessArticles());
   // console.log(Number(countSuccessArticles()));
   // console.log(homePosts.posts[0].likes);
 
@@ -80,7 +80,9 @@ const StatisticsArticles = () => {
           <div className="statistics_block">
             <p>
               Число принятых статей{' '}
-              <strong>{countSuccessArticles()}</strong>
+              <strong>
+                {homePosts.length ? countSuccessArticles(homePosts) : 0}
+              </strong>
             </p>
             <p>
               Число не принятых статей <strong>0</strong>

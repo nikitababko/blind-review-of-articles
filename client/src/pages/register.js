@@ -15,6 +15,7 @@ const Register = () => {
     degree: '',
     rank: '',
     placeOfWork: '',
+    country: '',
     currentCity: '',
     password: '',
     cf_password: '',
@@ -28,6 +29,7 @@ const Register = () => {
     degree,
     rank,
     placeOfWork,
+    country,
     currentCity,
     password,
     cf_password,
@@ -55,7 +57,9 @@ const Register = () => {
   return (
     <div className="auth_page auth_page--register">
       <form onSubmit={handleSubmit}>
-        {/* <h3 className="text-uppercase text-center mb-4">Диплом</h3> */}
+        <h3 className="text-uppercase text-center mb-4">
+          Система для слепого рецензирования статей
+        </h3>
 
         <div className="form-group">
           <label htmlFor="fullname">ФИО</label>
@@ -178,7 +182,33 @@ const Register = () => {
           </small>
         </div>
 
-        {/* Город проживания */}
+        {/* Место проживания */}
+        <div className="form-group">
+          <label htmlFor="country">Страна проживания</label>
+          <select
+            className="form-control"
+            id="country"
+            name="country"
+            onChange={handleChangeInput}
+            value={country}
+            required
+          >
+            <option value="" selected disabled hidden>
+              Укажите вашу страну
+            </option>
+            <option value="Доктор наук">Россия</option>
+            <option value="Кандидат наук">США</option>
+            <option value="Канада">Канада</option>
+            <option value="Канада">Австрия</option>
+            <option value="Германия">Германия</option>
+            <option value="Нидерланды">Нидерланды</option>
+          </select>
+
+          <small className="form-text text-danger">
+            {alert.country ? alert.country : ''}
+          </small>
+        </div>
+
         <div className="form-group">
           <label htmlFor="currentCity">Город проживания</label>
           <input

@@ -30,13 +30,19 @@ const Posts = () => {
   };
 
   const postsArr = homePosts.posts;
-  const lastTwoElements = postsArr.slice(-2);
 
   const postsAuthUser = () => {
     return postsArr.filter((item) => item.user._id === auth.user._id);
   };
 
-  // console.log(postsAuthUser());
+  const filteredSubjectArea = () => {
+    return postsArr.filter(
+      (item) => item.subjectArea === auth.user.subjectArea
+    );
+  };
+  const lastThreeElements = filteredSubjectArea(postsArr).slice(-3);
+
+  console.log(filteredSubjectArea(postsArr));
   // console.log(homePosts.posts[0].user._id, auth.user._id);
 
   return (
@@ -44,7 +50,7 @@ const Posts = () => {
       {/* // TODO: Добавил условие, что рецензент может оценивать только две статьи */}
 
       {auth.user.gender === 'Рецензент' && auth.user.role !== 'admin'
-        ? lastTwoElements.map((post) => (
+        ? lastThreeElements.map((post) => (
             <PostCard
               key={post._id}
               post={post}
@@ -74,7 +80,7 @@ const Posts = () => {
           ))}
 
       {/* {auth.user.gender === 'Рецензент' && auth.user.role !== 'admin'
-        ? lastTwoElements.map((post) => (
+        ? lastThreeElements.map((post) => (
             <PostCard key={post._id} post={post} theme={theme} />
           ))
         : homePosts.posts.map((post) => (

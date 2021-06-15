@@ -5,6 +5,7 @@ const valid = ({
   degree,
   rank,
   placeOfWork,
+  country,
   currentCity,
   password,
   cf_password,
@@ -51,6 +52,10 @@ const valid = ({
     err.currentCity = 'Пожалуйста добавьте город проживания.';
   } else if (currentCity.replace(/ /g, '').length > 25) {
     err.currentCity = 'Город проживания может содержать до 25 символов.';
+  }
+
+  if (!country) {
+    err.country = 'Пожалуйста добавьте страну проживания.';
   }
 
   if (!password) {

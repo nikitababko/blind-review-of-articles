@@ -31,7 +31,9 @@ const Login = () => {
   return (
     <div className="auth_page">
       <form onSubmit={handleSubmit}>
-        <h3 className="text-uppercase text-center mb-4">Диплом</h3>
+        <h3 className="text-uppercase text-center mb-4">
+          Система для слепого рецензирования статей
+        </h3>
 
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email адрес</label>
@@ -76,7 +78,7 @@ const Login = () => {
         <p className="my-2">
           У вас нету аккаунта?{' '}
           <Link to="/register" style={{ color: 'crimson' }}>
-            Зарегестрироваться
+            Зарегистрироваться
           </Link>
         </p>
       </form>
